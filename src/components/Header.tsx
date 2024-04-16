@@ -53,7 +53,7 @@ const Wrap = styled.div`
     background-color: #2E2E33;
     box-shadow: 2px 5px 5px #00000046;
     .container {
-        max-width: unset;
+        /* max-width: unset;    */
         .header-wrap {
             width: 100%;
             display: flex;

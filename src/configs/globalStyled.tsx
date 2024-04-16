@@ -55,4 +55,11 @@ export const GlobalStyle = createGlobalStyle`
               border-radius: 6px !important;
           }
     }
+  .frame {
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #2E2E33;
+    display: flex;
+    flex-direction: column;
+  }
 `;
