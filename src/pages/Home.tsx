@@ -4,6 +4,8 @@ import Footer from 'components/Footer';
 import Statistic from './Statistic';
 import CashBack from './CashBack';
 import Action from './Action';
+import Tokenomic from './Tokenomic';
+import PoolDetail from './PoolDetail';
 
 const Home = () => {
   return (
@@ -13,10 +15,12 @@ const Home = () => {
         <div className="container home">
           <div className="home-left">
             <Statistic />
+            <Tokenomic />
           </div>
           <div className="home-right">
             <CashBack />
             <Action />
+            <PoolDetail />
           </div>
         </div>
         <Footer />

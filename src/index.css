@@ -125,12 +125,17 @@ button:focus {
 }
 
 .color-green {
-  color: green;
+  color: rgb(8, 187, 8);
 }
 
 .color-gray {
   color: #c6c6c7;
 }
+
+.color-gray-2 {
+  color: #c6c6c74e;
+}
+
 
 .color-blue {
   color: #5EB5F7;

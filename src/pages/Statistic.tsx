@@ -1,9 +1,85 @@
 import styled from 'styled-components';
 import imgProject from 'assets/images/x.jpg';
-import { listContact } from 'components/Footer';
+import { FaTelegramPlane } from 'react-icons/fa';
+import { BsTwitterX } from 'react-icons/bs';
+import { useMemo, useState } from 'react';
+import numeral from 'numeral';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc)
+
+type ContactItem = {
+    icon: any, link: string
+}
+
+const listContact = [{
+    icon: <FaTelegramPlane color='#fff' size={20} />,
+    link: "LINK_TELE",
+}, {
+    icon: <BsTwitterX color="#fff" size={16} />,
+    link: "LINK_TWITTER",
+}] as ContactItem[]
+
+type DataStatis = {
+    name: string,
+    startTime: number,
+    endTime: number,
+    listContact: ContactItem[],
+    img: string,
+    desc: string,
+    presaleAddress: string,
+    tokenName: string,
+    tokenSymbol: string,
+    tokenDecimal: 9,
+    tokenAddress: string,
+    totalSupply: number,
+    tokenForPresale: number,
+    tokenForLiqquid: number,
+    initMarketCap: number,
+    softCap: number,
+    limitPerUser: null | number,
+    listingOn: string,
+    listingLink: string,
+    liquidPercent: number
+}
 
 const Statistic = () => {
-    const time = 324234
+    const [data, setData] = useState<DataStatis>({
+        name: "QuYeN kEc Kec Fairy",
+        startTime: Date.now() - 123124,
+        endTime: Date.now() + 546688,
+        listContact: listContact,
+        img: imgProject,
+        desc: "$TIGER is a first meme token with real utility from Pixel God. Its main use is in a game where you can loot crypto. Made by Pixel God - founder of the hit NFT collections TON Sharks, Funny Snails, VIP Viking Club and Pixel Genesis.",
+        presaleAddress: "EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8",
+        tokenName: "QuYeN kEc Kec",
+        tokenSymbol: "QKK",
+        tokenDecimal: 9,
+        tokenAddress: "EQCktEmAsvYBn8DPS6lu4QfatjEJJRLwD94aDqb8Ss6etuaA",
+        totalSupply: 5000000000,
+        tokenForPresale: 2000000000,
+        tokenForLiqquid: 1600000000,
+        initMarketCap: 134600.4553,
+        softCap: 1000,
+        limitPerUser: null,
+        listingOn: "STON.fi",
+        listingLink: "STON.fi",
+        liquidPercent: 51
+    })
+    const dataState = ["Not start yet", "Sale live", "Sale ended"]
+
+    const state = useMemo(() => {
+        let now = Date.now();
+        if (now < data.startTime || !data.startTime || !data.endTime) {
+            return 0
+        }
+        if (now > data.endTime) {
+            return 2
+        }
+        return 1
+    }, [data.startTime, data.endTime])
+
 
     return (
         <Wrap className='frame'>
@@ -13,48 +89,84 @@ const Statistic = () => {
                 </div>
                 <div className="st-text">
                     <div className="stt-name">
-                        <span className="text-3 color-white">QuYeN kEc Kec</span>
-                        <div className="">
+                        <span className="text-3 color-white">{data.name}</span>
+                        <div className={`stt-state state-${state}`}>
                             <div></div>
-                            <span className="text-1 color-green">Sale Live</span>
+                            <span className="text-1 color-green">{dataState[state]}</span>
                         </div>
                     </div>
 
                     <div className="st-socials">
-                        {listContact.map((item, index) => <a key={index} href={item.link} target='_blank' rel='noreferrer' className='sts-item' style={{ backgroundColor: item.bg }}>
+                        {data.listContact.map((item, index) => <a key={index} href={item.link} target='_blank' rel='noreferrer' className='sts-item' >
                             {item.icon}
                         </a>)}
                     </div>
                 </div>
             </div>
-            <span className="text-2 color-gray">$TIGER is a first meme token with real utility from Pixel God. Its main use is in a game where you can loot crypto. Made by Pixel God - founder of the hit NFT collections TON Sharks, Funny Snails, VIP Viking Club and Pixel Genesis.</span>
+            <span className="text-1 color-gray">{data.desc}</span>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Presale Address</span>
+                <span className="text-1 color-green">{data.presaleAddress}</span>
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Token Name</span>
+                <span className="text-1 color-white">{data.tokenName}</span>
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Token Symbol</span>
+                <span className="text-1 color-white">{data.tokenSymbol}</span>
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Token Decimals</span>
+                <span className="text-1 color-white">{data.tokenDecimal}</span>
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Token Address</span>
+                <div>
+                    <span className="text-1 color-green">{data.tokenAddress}</span>
+                    <span className="text-1 color-gray-2">{"(Do not send TON to the token address!)"}</span>
+                </div>
+
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Total Supply</span>
+                <span className="text-1 color-white">{numeral(data.totalSupply).format("0,0")} {data.tokenSymbol}</span>
             </div>
             <div className="statis-row">
-                <span className="text-2 color-gray">Presale Address</span>
-                <span className="text-2 color-green">EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8</span>
+                <span className="text-1 color-gray">Tokens For Presale</span>
+                <span className="text-1 color-white">{numeral(data.tokenForPresale).format("0,0")} {data.tokenSymbol}</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Tokens For Liquidity</span>
+                <span className="text-1 color-white">{numeral(data.tokenForLiqquid).format("0,0")} {data.tokenSymbol}</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Initial Market Cap (estimate)</span>
+                <span className="text-1 color-white">{numeral(data.initMarketCap).format("0,0.[0000]")} TON</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Soft Cap</span>
+                <span className="text-1 color-white">{numeral(data.softCap).format("0,0.[0000]")} TON</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Limit per user</span>
+                <span className="text-1 color-white">{data.limitPerUser === null ? "∞" : numeral(data.limitPerUser).format("0,0.[0000]")} TON</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Presale Start Time</span>
+                <span className="text-1 color-white">{dayjs(data.startTime).utc(true).format("HH:mm MM/DD/YYYY")} (UTC)</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Presale End Time</span>
+                <span className="text-1 color-white">{dayjs(data.endTime).utc(true).format("HH:mm MM/DD/YYYY")} (UTC)</span>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Listing On</span>
+                <a href={data.listingLink} target='_blank' rel='noreferrer' className="text-1 color-green">{data.listingOn}</a>
+            </div>
+            <div className="statis-row">
+                <span className="text-1 color-gray">Liquidity Percent</span>
+                <span className="text-1 color-white">{data.liquidPercent}%</span>
             </div>
         </Wrap>
     );
@@ -69,10 +181,13 @@ const Wrap = styled.div`
         display: flex;
         width: 100%;
         gap: 20px;
+        border-bottom: 1px solid #55555b;
+        padding-bottom: 24px;
+        margin-bottom: 10px;
         .st-img {
             > img {
-                width: 100px;
-                height: 100px;
+                width: 80px;
+                height: 80px;
                 border-radius: 50%;
             }
         }
@@ -85,18 +200,37 @@ const Wrap = styled.div`
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
-                > div {
-                    padding: 10px 16px;
+                .stt-state {
+                    padding: 6px 16px;
                     background: #039f2f41;
                     border-radius: 20px;
                     display: flex;
                     gap: 10px;
                     align-items: center;
+                    height: fit-content;
                     > div {
-                        background: #05e44441;
+                        background: rgb(8, 187, 8);
                         width: 10px;
                         height: 10px;
                         border-radius: 50%;
+                    }
+                }
+                .state-0 {
+                    background: #9f3f0341;
+                    > div {
+                        background: rgb(187, 136, 8);
+                    }
+                    > span {
+                        color: rgb(187, 136, 8);
+                    }
+                }
+                .state-2 {
+                    background: #9f150341;
+                    > div {
+                        background: rgb(227, 33, 3);
+                    }
+                    > span {
+                        color: rgb(227, 33, 3);
                     }
                 }
             }
@@ -104,13 +238,17 @@ const Wrap = styled.div`
                 display: flex;
                 gap: 20px;
                 .sts-item {
-                    width: 40px;
-                    height: 40px;
+                    width: 32px;
+                    height: 32px;
                     border-radius: 6px;
                     display: flex;
-                    background: #2E2E33;
+                    background: #3B3B3F;
                     align-items: center;
                     justify-content: center;
+                    transition: 0.3s ease-in-out;
+                    &:hover {
+                        background: #46464a;
+                    }
                 }
             }
         }
@@ -126,6 +264,11 @@ const Wrap = styled.div`
         &:last-child {
             padding-bottom: 0;
             border-bottom: none;
+        }
+        > div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
     }
 `

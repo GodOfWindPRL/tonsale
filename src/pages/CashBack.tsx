@@ -8,8 +8,8 @@ const CashBack = () => {
 
     return (
         <Wrap className='frame'>
-            <span className="text-2 color-gray">Your Cashback</span>
-            <span className="text-2">{numeral(amount).format("0,0.[00]")} TON</span>
+            <span className="text-1 color-gray">Your Cashback</span>
+            <span className="text-1">{numeral(amount).format("0,0.[00]")} TON</span>
         </Wrap>
     );
 }
@@ -23,4 +23,5 @@ const Wrap = styled.div`
     flex-direction: row !important;
     align-items: center;
     justify-content: space-between;
+    padding: 20px;
 `
