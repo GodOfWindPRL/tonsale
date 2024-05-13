@@ -1,72 +1,16 @@
 import styled from 'styled-components';
 import imgProject from 'assets/images/x.jpg';
-import { FaTelegramPlane } from 'react-icons/fa';
-import { BsTwitterX } from 'react-icons/bs';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import numeral from 'numeral';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { DataContext } from 'contexts/DataContext';
 
 dayjs.extend(utc)
 
-type ContactItem = {
-    icon: any, link: string
-}
-
-const listContact = [{
-    icon: <FaTelegramPlane color='#fff' size={20} />,
-    link: "LINK_TELE",
-}, {
-    icon: <BsTwitterX color="#fff" size={16} />,
-    link: "LINK_TWITTER",
-}] as ContactItem[]
-
-type DataStatis = {
-    name: string,
-    startTime: number,
-    endTime: number,
-    listContact: ContactItem[],
-    img: string,
-    desc: string,
-    presaleAddress: string,
-    tokenName: string,
-    tokenSymbol: string,
-    tokenDecimal: 9,
-    tokenAddress: string,
-    totalSupply: number,
-    tokenForPresale: number,
-    tokenForLiqquid: number,
-    initMarketCap: number,
-    softCap: number,
-    limitPerUser: null | number,
-    listingOn: string,
-    listingLink: string,
-    liquidPercent: number
-}
-
 const Statistic = () => {
-    const [data, setData] = useState<DataStatis>({
-        name: "QuYeN kEc Kec Fairy",
-        startTime: Date.now() - 123124,
-        endTime: Date.now() + 546688,
-        listContact: listContact,
-        img: imgProject,
-        desc: "$TIGER is a first meme token with real utility from Pixel God. Its main use is in a game where you can loot crypto. Made by Pixel God - founder of the hit NFT collections TON Sharks, Funny Snails, VIP Viking Club and Pixel Genesis.",
-        presaleAddress: "EQAoe-73cbZIUzZMNq3ELs_e2ct6PMEzy3t_YN6-vtP1IDT8",
-        tokenName: "QuYeN kEc Kec",
-        tokenSymbol: "QKK",
-        tokenDecimal: 9,
-        tokenAddress: "EQCktEmAsvYBn8DPS6lu4QfatjEJJRLwD94aDqb8Ss6etuaA",
-        totalSupply: 5000000000,
-        tokenForPresale: 2000000000,
-        tokenForLiqquid: 1600000000,
-        initMarketCap: 134600.4553,
-        softCap: 1000,
-        limitPerUser: null,
-        listingOn: "STON.fi",
-        listingLink: "STON.fi",
-        liquidPercent: 51
-    })
+    const { data } = useContext(DataContext)
+
     const dataState = ["Not start yet", "Sale live", "Sale ended"]
 
     const state = useMemo(() => {

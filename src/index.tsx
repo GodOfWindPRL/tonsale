@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './configs/globalStyled';
 import "language/I18n";
+import DataContextWrap from 'contexts/DataContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +12,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <GlobalStyle />
-    <App />
+    <DataContextWrap>
+      <App />
+    </DataContextWrap>
+
   </>
 );
 
